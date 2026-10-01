@@ -1,0 +1,57 @@
+html { overflow-x: hidden; }
+body { min-width: 320px; }
+
+.answer-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 3.5rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--color-base-300);
+  border-radius: var(--radius-box);
+  background: var(--color-base-100);
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+.answer-option:hover:not(.is-locked) {
+  border-color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary) 6%, var(--color-base-100));
+  transform: translateY(-1px);
+}
+
+.answer-option:has(input:checked) {
+  border-color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary) 10%, var(--color-base-100));
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+.answer-option.is-locked { cursor: default; }
+.answer-option span { min-width: 0; overflow-wrap: anywhere; line-height: 1.5; }
+
+.match-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.match-column { display: grid; align-content: start; gap: 0.75rem; min-width: 0; }
+.match-button { min-height: 3.5rem; height: auto; padding: 0.75rem 1rem; white-space: normal; overflow-wrap: anywhere; line-height: 1.35; }
+.match-button.is-selected { box-shadow: 0 0 0 3px color-mix(in oklab, currentColor 25%, transparent); }
+.match-button.is-paired { opacity: 0.75; }
+
+.pair-0 { color: var(--color-error); border-color: var(--color-error); }
+.pair-1 { color: var(--color-warning); border-color: var(--color-warning); }
+.pair-2 { color: var(--color-success); border-color: var(--color-success); }
+.pair-3 { color: var(--color-info); border-color: var(--color-info); }
+.pair-4 { color: var(--color-secondary); border-color: var(--color-secondary); }
+
+@media (max-width: 639px) {
+  .match-grid { grid-template-columns: 1fr; }
+  .match-column + .match-column { padding-top: 0.5rem; border-top: 1px solid var(--color-base-300); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
